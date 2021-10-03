@@ -6,11 +6,11 @@ const AddressItem = (props) => {
     return <TouchableOpacity activeOpacity={0.6} onPress={props.onPress} style={styles.container}>
         <View style={styles.icon}></View>
         <View style={styles.textContainer}>
-            <ParagraphTextSmall size="large">
-                Current location
-            </ParagraphTextSmall>
+            {props.label && <ParagraphTextSmall size="large">
+                {props.label}
+            </ParagraphTextSmall>}
             <ParagraphTextSmall size="small">
-            106, Taipei City, Da’an District, Section 2, Xinsheng S Rd, 1號露天音樂表演臺
+                {props.address}
             </ParagraphTextSmall>
         </View>
         <View style={styles.icon}></View>

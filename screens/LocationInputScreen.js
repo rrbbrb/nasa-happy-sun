@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity } from 'react-native';
 import AddressItem from '../components/AddressItem/AddressItem';
 import FakeTextInputSearch from '../components/text-inputs/FakeTextInputSearch';
@@ -8,29 +8,37 @@ import TitleText from '../components/texts/TitleText';
 import SafeAreaWrapper from '../components/wrappers/SafeAreaWrapper';
 
 const LocationInputScreen = (props) => {
+    const [savedLocations, setSavedLocations] = useState([]);
+
     return <SafeAreaWrapper>
         <Image source={require("../assets/TopArt.png")} style={styles.image} resizeMode="contain" />
         <View style={styles.container}>
             <View style={styles.titleContainer}>
-                <View style={styles.title}>                
+                <View style={styles.title}>
                     <TitleText size="large">Location</TitleText>
                 </View>
                 <ParagraphText size="small">Enter a place in order see how much sun that area gets.</ParagraphText>
             </View>
             <TouchableOpacity activeOpacity={1} style={styles.input} onPress={() => props.navigation.navigate("SearchScreen")}>
-                <FakeTextInputSearch placeholder="Enter new address" span="Search for a new location."/>
+                <FakeTextInputSearch placeholder="Enter new address" span="Search for a new location." />
             </TouchableOpacity>
             <View style={styles.dataContainer}>
                 <View>
                     <SubtitleText size="small">Previous address</SubtitleText>
                 </View>
-                <View style={styles.current}>
-                    <AddressItem />
+                {savedLocations.length > 0
+                ? <View>
+                    <View style={styles.current}>
+                        <AddressItem />
+                    </View>
+                    <View style={styles.recentContainer}>
+                        <View style={styles.recent}><AddressItem /></View>
+                        <View style={styles.recent}><AddressItem /></View>
+                    </View>
                 </View>
-                <View style={styles.recentContainer}>
-                    <View style={styles.recent}><AddressItem /></View>
-                    <View style={styles.recent}><AddressItem /></View>
-                </View>
+                : <View style={styles.noLocations}>
+                    <Text style={styles.noLocationText}>You haven't saved any locations yet. Time to add some!</Text>
+                </View>}
             </View>
         </View>
     </SafeAreaWrapper>
@@ -67,6 +75,18 @@ const styles = StyleSheet.create({
     },
     recent: {
         paddingVertical: 3
+    },
+    noLocations: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: 200,
+        paddingHorizontal: 36,
+    },
+    noLocationText: {
+        textAlign: 'center',
+        fontFamily: 'ubuntu',
+        lineHeight: 24,
+        fontSize: 14
     }
 });
 

@@ -2,9 +2,11 @@ import React from 'react';
 import { Dimensions, SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 
 const SafeAreaWrapper = (props) => (
-    <SafeAreaView style={{ ...props.style }, { ...styles.wrapper }}>
-        {props.children}
-    </SafeAreaView>
+    <ScrollView>
+        <SafeAreaView style={{ ...props.style }, { ...styles.wrapper }}>
+            {props.children}
+        </SafeAreaView>
+    </ScrollView>
 );
 
 const styles = StyleSheet.create({

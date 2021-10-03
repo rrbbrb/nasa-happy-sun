@@ -60,8 +60,17 @@ export default function App() {
         <Stack.Screen
           name="AddressInfoScreen"
           component={AddressInfoScreen}
+          options={{
+            headerShown: false
+          }}
         />
-        <Stack.Screen name="SunInfoScreen" component={SunInfoScreen} />
+        <Stack.Screen
+          name="SunInfoScreen"
+          component={SunInfoScreen}
+          options={{
+            headerShown: false
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

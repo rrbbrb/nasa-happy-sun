@@ -16,7 +16,7 @@ const SplashScreen = (props) => {
                 <Image source={require('../assets/welcome-sun.png')} resizeMode="contain" style={styles.image} />
             </View>
             <View style={styles.buttonContainer}>
-                <PrimaryButton onPress={() => props.navigation.navigate("LocationInputScreen")}>
+                <PrimaryButton size="large" onPress={() => props.navigation.navigate("LocationInputScreen")}>
                     <Text>Continue</Text>
                 </PrimaryButton>
             </View>

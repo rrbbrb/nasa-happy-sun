@@ -1,18 +1,40 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Image, Dimensions, FlatList } from 'react-native';
 import AddressItem from '../components/AddressItem/AddressItem';
 import TextInputSearch from '../components/text-inputs/TextInputSearch';
-import SubtitleText from '../components/texts/SubtitleText';
 import TitleText from '../components/texts/TitleText';
 import SafeAreaWrapper from '../components/wrappers/SafeAreaWrapper';
+import axios from 'axios';
 
 const SearchScreen = (props) => {
-    const [autoFocus, setAutoFocus] = useState(true);
+    const [userInput, setUserInput] = useState('');
+    const [suggestions, setSuggestions] = useState([]);
 
     useEffect(() => {
-        setAutoFocus(true);
-    }, [autoFocus])
+        let inputTimeOut;
+        if(userInput) {
+            inputTimeOut = setTimeout(() => {
+                fetchGooglePlaces();
+            }, 25)
+        }
+        return(() => {
+            clearTimeout(inputTimeOut);
+        })
+    }, [userInput])
 
+    const userInputHandler = (input) => {
+        setUserInput(input);
+    }
+
+    const fetchGooglePlaces = () => {
+        axios.get(`https://maps.googleapis.com/maps/api/place/findplacefromtext/json?language=en&input=${userInput}&inputtype=textquery&fields=formatted_address%2Cplace_id%2Cname%2Cgeometry&key=AIzaSyBB4D1FwaylNXLGK_-9ROpuLMQDbFK57ac`)
+        .then((res) => {
+            setSuggestions(res.data["candidates"]);
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }
     return <SafeAreaWrapper>
         <Image source={require("../assets/TopArt.png")} style={styles.image} resizeMode="contain" />
         <View style={styles.container}>
@@ -23,17 +45,26 @@ const SearchScreen = (props) => {
                 <TextInputSearch
                     placeholder="Enter new address"
                     span='Results for "search term"...'
-                    autoFocus={autoFocus}
-                    value=""
+                    value={userInput}
+                    onChangeText={userInputHandler}
                 />
             </View>
             <View>
-                <View activeOpacity={0.6} style={styles.address}>
-                    <AddressItem onPress={() => props.navigation.navigate("AddressInfoScreen")} />
-                </View>
-                <View activeOpacity={0.6} style={styles.address}>
-                    <AddressItem />
-                    </View>
+                <FlatList
+                    keyExtractor={(item, index) => item["place_id"]}
+                    data={suggestions}
+                    renderItem={item => <View activeOpacity={0.6} style={styles.address}>
+                        <AddressItem
+                            label={item.item["name"]}
+                            address={item.item["formatted_address"]}
+                            onPress={() => props.navigation.navigate("AddressInfoScreen", { location: {
+                                address: `${item.item["name"]}, ${item.item["formatted_address"]}`,
+                                lat: item.item["geometry"]["location"]["lat"],
+                                lng: item.item["geometry"]["location"]["lng"]
+                            } })}
+                        />
+                    </View>}
+                />
             </View>
         </View>
     </SafeAreaWrapper>
