@@ -4,7 +4,7 @@ import { TextInput, View, StyleSheet, Dimensions, Text } from 'react-native';
 const FakeTextInputSearch = (props) => {
     return <View>
         <View style={styles.input}>
-            <Text>{props.placeholder}</Text>
+            <Text style={styles.placeholder}>{props.placeholder}</Text>
         </View>
         {props.span ? <Text style={styles.span}>{props.span}</Text> : null}
     </View >
@@ -13,13 +13,15 @@ const FakeTextInputSearch = (props) => {
 const styles = StyleSheet.create({
     input: {
         borderColor: "#8C8C8C",
-        fontFamily: 'ubuntu-medium',
         borderWidth: 1,
         borderRadius: 5,
-        color: "#8C8C8C",
         paddingVertical: 11,
         paddingHorizontal: 15,
-        fontSize: Dimensions.get("window").width / 25
+    },
+    placeholder: {
+        fontFamily: 'ubuntu-medium',
+        fontSize: Dimensions.get("window").width / 25,
+        color: "#8C8C8C",
     },
     span: {
         fontFamily: 'ubuntu',

@@ -50,8 +50,17 @@ export default function App() {
             headerShown: false
           }}
         />
-        <Stack.Screen name="SearchScreen" component={SearchScreen} />
-        <Stack.Screen name="AddressInfoScreen" component={AddressInfoScreen} />
+        <Stack.Screen
+          name="SearchScreen"
+          component={SearchScreen}
+          options={{
+            headerShown: false
+          }}
+        />
+        <Stack.Screen
+          name="AddressInfoScreen"
+          component={AddressInfoScreen}
+        />
         <Stack.Screen name="SunInfoScreen" component={SunInfoScreen} />
       </Stack.Navigator>
     </NavigationContainer>

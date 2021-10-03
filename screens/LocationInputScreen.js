@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
         marginHorizontal: Dimensions.get("window").width * 0.04,
         textAlign: 'left',
         alignSelf: 'flex-start',
+        flex: 1
     },
     titleContainer: {
         textAlign: 'left',

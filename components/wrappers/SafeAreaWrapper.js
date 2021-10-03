@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, SafeAreaView, StyleSheet } from 'react-native';
+import { Dimensions, SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 
 const SafeAreaWrapper = (props) => (
     <SafeAreaView style={{ ...props.style }, { ...styles.wrapper }}>
@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#FFF',
         minHeight: Dimensions.get('window').height,
-    }
+    },
 })
 
 export default SafeAreaWrapper;

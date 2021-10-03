@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextInput, View, StyleSheet, Dimensions, Text } from 'react-native';
+import { TextInput, View, StyleSheet, Dimensions, Text, Keyboard } from 'react-native';
 
 const TextInputSearch = (props) => {
     return <View>
@@ -9,6 +9,8 @@ const TextInputSearch = (props) => {
             value={props.value}
             placeholder={props.placeholder}
             disabled={props.disabled}
+            placeholderTextColor={"#8C8C8C"}
+            autoFocus={props.autoFocus}
         />
         {props.span ? <Text style={styles.span}>{props.span}</Text> : null}
     </View>
@@ -20,7 +22,7 @@ const styles = StyleSheet.create({
         fontFamily: 'ubuntu-medium',
         borderWidth: 1,
         borderRadius: 5,
-        color: "#8C8C8C",
+        color: "#000",
         paddingVertical: 8,
         paddingHorizontal: 15,
         fontSize: Dimensions.get("window").width / 25
