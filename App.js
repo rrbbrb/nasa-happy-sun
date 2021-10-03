@@ -43,7 +43,13 @@ export default function App() {
             headerShown: false
           }}
         />
-        <Stack.Screen name="LocationInputScreen" component={LocationInputScreen} />
+        <Stack.Screen
+          name="LocationInputScreen"
+          component={LocationInputScreen}
+          options={{
+            headerShown: false
+          }}
+        />
         <Stack.Screen name="SearchScreen" component={SearchScreen} />
         <Stack.Screen name="AddressInfoScreen" component={AddressInfoScreen} />
         <Stack.Screen name="SunInfoScreen" component={SunInfoScreen} />

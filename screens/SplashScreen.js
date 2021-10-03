@@ -11,12 +11,12 @@ const SplashScreen = (props) => {
             <View style={styles.titleContainer}>
                 <Image source={require('../assets/HappySun.png')} resizeMode="contain" style={styles.image} />
             </View>
-            <ParagraphText>Meassure sun hours using NASA data</ParagraphText>
+            <ParagraphText size="large">Meassure sun hours using NASA data</ParagraphText>
             <View style={styles.imageContainer}>
                 <Image source={require('../assets/welcome-sun.png')} resizeMode="contain" style={styles.image} />
             </View>
             <View style={styles.buttonContainer}>
-                <PrimaryButton>
+                <PrimaryButton onPress={() => props.navigation.navigate("LocationInputScreen")}>
                     <Text>Continue</Text>
                 </PrimaryButton>
             </View>

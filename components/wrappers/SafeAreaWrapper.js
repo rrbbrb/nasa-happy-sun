@@ -12,7 +12,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#FFF',
         minHeight: Dimensions.get('window').height,
-        paddingVertical: Dimensions.get('window').height / 30
     }
 })
 
